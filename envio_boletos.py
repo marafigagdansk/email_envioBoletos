@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 import os
 import sys
-
+from datetime import datetime
 
 def selecionar_arquivo_csv():
     root = tk.Tk()
@@ -36,6 +36,9 @@ def enviar_email(destinatario, assunto, corpo, assinatura_path):
     <img src="cid:minha_assinatura">
     """
 
+    if not os.path.exists(assinatura_path):
+        print(f"Erro: imagem de assinatura não encontrada em: {assinatura_path}")
+        return
 
     assinatura = email.Attachments.Add(assinatura_path)
     assinatura.PropertyAccessor.SetProperty("http://schemas.microsoft.com/mapi/proptag/0x3712001F", "minha_assinatura")
@@ -57,10 +60,10 @@ def processador_boletos(arquivo_csv):
         return
     
     assinatura_path = obter_caminho_assinatura()
+    vencimento = datetime.now().strftime("%d/%m/%Y")
 
     for _, row in df.iterrows():
         email = row["Email"]
-        vencimento = row["Vencimento"]
 
         assunto = f"Fatura Medicina do Trabalho {vencimento}"
         corpo = f"""
