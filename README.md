@@ -25,9 +25,9 @@ Este script permite o envio automático de e-mails via Microsoft Outlook com bas
 O arquivo CSV deve conter as seguintes colunas:
 
 ```csv
-Email,Vencimento
-joao@email.com,2025-04-10
-maria@email.com,2025-04-12
+Email
+joao@email.com
+maria@email.com
 ```
 
 ### 3️⃣ **Executando o Script**
